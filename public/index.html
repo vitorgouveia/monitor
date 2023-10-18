@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="h-full">
+  <head>
+    <title>Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .special-hover {
+        background: linear-gradient(90deg, rgba(32, 46, 96, 0.00) 0.77%, rgba(32, 46, 96, 0.00) 100%);
+      }
+
+      .special-hover:hover {
+        background: linear-gradient(90deg, #202E60 0.77%, rgba(32, 46, 96, 0.00) 100%);
+      }
+    </style>
+
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js
+"></script>
+
+<!-- Primary Meta Tags -->
+<title>Monitor — Dados do seu sistema em um único lugar</title>
+<meta name="title" content="Monitor — Dados do seu sistema em um único lugar" />
+<meta name="description" content="Com o monitor você pode ver dados de temperatura, uso da cpu, detalhes do processador e mais de forma fácil e rápida." />
+
+<link rel="icon" href="/public/icon.png" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://github.com/vitorgouviea/monitor" />
+<meta property="og:title" content="Monitor — Dados do seu sistema em um único lugar" />
+<meta property="og:description" content="Com o monitor você pode ver dados de temperatura, uso da cpu, detalhes do processador e mais de forma fácil e rápida." />
+<meta property="og:image" content="/public/cover.png" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://github.com/vitorgouviea/monitor" />
+<meta property="twitter:title" content="Monitor — Dados do seu sistema em um único lugar" />
+<meta property="twitter:description" content="Com o monitor você pode ver dados de temperatura, uso da cpu, detalhes do processador e mais de forma fácil e rápida." />
+<meta property="twitter:image" content="/public/cover.png" />
+
+<!-- Meta Tags Generated with https://metatags.io -->
+  </head>
+  <body class="w-screen bg-black text-white flex h-full">
+    <aside class="flex flex-col justify-between h-full w-[250px] p-6 border-r border-white/[.15]">
+      <nav class="flex flex-col gap-4 w-full">
+        <svg width="187" height="89" viewBox="0 0 187 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_f_1128_2675)">
+          <rect x="24.7762" y="26.1079" width="29.5146" height="29.5146" fill="#324CAE"/>
+          </g>
+          <g clip-path="url(#clip0_1128_2675)">
+          <path d="M24.7798 49.0155L24.7798 32.3384L33.1184 36.9709V44.4293L39.7893 48.1817L46.4601 44.4293V36.9709L54.7987 32.3384V49.0155L39.7893 57.3541L24.7798 49.0155Z" fill="#192657"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M28.9491 34.6554L24.7798 32.3391L39.7893 24.0005L54.7987 32.3391L50.6294 34.6554V46.9316L39.7893 53.1855L28.9491 46.9316L28.9491 34.6554ZM50.1778 34.9063L46.4601 36.9716V36.9253L39.7893 33.1729L33.1184 36.9253V36.9716L29.4008 34.9063V46.675L39.7893 52.6684L50.1778 46.675V34.9063Z" fill="url(#paint0_linear_1128_2675)"/>
+          <path d="M46.4595 36.9228L39.7915 33.1812L33.1154 36.9294V44.4315L39.7858 48.1851L46.4595 44.4315V36.9228Z" fill="#010205"/>
+          </g>
+          <g filter="url(#filter1_d_1128_2675)">
+          <path d="M64.5269 51V32.1107H69.5461L76.4272 43.3093L72.3525 43.2824L79.3146 32.1107H84.1718V51H78.559V46.4935C78.559 44.8745 78.595 43.4173 78.6669 42.122C78.7569 40.8268 78.9008 39.5405 79.0987 38.2632L79.7463 39.9632L75.1859 47.0332H73.4049L68.9255 39.9632L69.6001 38.2632C69.798 39.4685 69.9329 40.7098 70.0048 41.9871C70.0948 43.2464 70.1398 44.7485 70.1398 46.4935V51H64.5269ZM95.2543 51.2698C93.6892 51.2698 92.295 50.946 91.0717 50.2984C89.8484 49.6508 88.8859 48.7693 88.1843 47.6539C87.4827 46.5205 87.1319 45.2253 87.1319 43.7681C87.1319 42.3109 87.4827 41.0246 88.1843 39.9093C88.8859 38.7759 89.8484 37.8854 91.0717 37.2378C92.295 36.5902 93.6892 36.2663 95.2543 36.2663C96.8195 36.2663 98.2047 36.5902 99.41 37.2378C100.633 37.8854 101.587 38.7759 102.27 39.9093C102.972 41.0246 103.323 42.3109 103.323 43.7681C103.323 45.2253 102.972 46.5205 102.27 47.6539C101.587 48.7693 100.633 49.6508 99.41 50.2984C98.2047 50.946 96.8195 51.2698 95.2543 51.2698ZM95.2543 46.6824C95.7401 46.6824 96.1718 46.5565 96.5496 46.3047C96.9454 46.0528 97.2512 45.711 97.4671 45.2792C97.683 44.8295 97.7909 44.3258 97.7909 43.7681C97.7909 43.1924 97.683 42.6887 97.4671 42.2569C97.2512 41.8072 96.9454 41.4564 96.5496 41.2045C96.1718 40.9527 95.7401 40.8268 95.2543 40.8268C94.7506 40.8268 94.3009 40.9527 93.9051 41.2045C93.5273 41.4564 93.2215 41.8072 92.9876 42.2569C92.7717 42.6887 92.6638 43.1924 92.6638 43.7681C92.6638 44.3258 92.7717 44.8295 92.9876 45.2792C93.2215 45.711 93.5273 46.0528 93.9051 46.3047C94.3009 46.5565 94.7506 46.6824 95.2543 46.6824ZM106.025 51V36.5632H111.099L111.368 39.4775L110.208 39.8013C110.406 39.1177 110.757 38.5151 111.26 37.9934C111.782 37.4537 112.403 37.0309 113.122 36.7251C113.842 36.4192 114.607 36.2663 115.416 36.2663C116.496 36.2663 117.413 36.4912 118.169 36.941C118.924 37.3907 119.491 38.0563 119.869 38.9378C120.264 39.8013 120.462 40.8537 120.462 42.095V51H114.984V42.5538C114.984 42.158 114.921 41.8252 114.795 41.5553C114.67 41.2855 114.481 41.0786 114.229 40.9347C113.977 40.7908 113.68 40.7188 113.338 40.7188C113.068 40.7188 112.817 40.7638 112.583 40.8537C112.367 40.9257 112.178 41.0426 112.016 41.2045C111.854 41.3664 111.728 41.5463 111.638 41.7442C111.548 41.9421 111.503 42.167 111.503 42.4189V51H108.778C108.094 51 107.519 51 107.051 51C106.601 51 106.259 51 106.025 51ZM124.052 51V36.5632H129.53V51H124.052ZM126.805 33.9456C125.833 33.9456 125.069 33.7208 124.511 33.271C123.971 32.8213 123.702 32.1826 123.702 31.3551C123.702 30.5995 123.98 29.9789 124.538 29.4932C125.096 29.0074 125.851 28.7646 126.805 28.7646C127.776 28.7646 128.532 28.9894 129.071 29.4392C129.629 29.8889 129.908 30.5276 129.908 31.3551C129.908 32.1107 129.629 32.7313 129.071 33.2171C128.514 33.7028 127.758 33.9456 126.805 33.9456ZM134.161 51V32.9202H139.639V51H134.161ZM131.921 41.1506V36.5632H142.014V41.1506H131.921ZM151.358 51.2698C149.793 51.2698 148.399 50.946 147.176 50.2984C145.952 49.6508 144.99 48.7693 144.288 47.6539C143.587 46.5205 143.236 45.2253 143.236 43.7681C143.236 42.3109 143.587 41.0246 144.288 39.9093C144.99 38.7759 145.952 37.8854 147.176 37.2378C148.399 36.5902 149.793 36.2663 151.358 36.2663C152.923 36.2663 154.309 36.5902 155.514 37.2378C156.737 37.8854 157.691 38.7759 158.374 39.9093C159.076 41.0246 159.427 42.3109 159.427 43.7681C159.427 45.2253 159.076 46.5205 158.374 47.6539C157.691 48.7693 156.737 49.6508 155.514 50.2984C154.309 50.946 152.923 51.2698 151.358 51.2698ZM151.358 46.6824C151.844 46.6824 152.276 46.5565 152.654 46.3047C153.049 46.0528 153.355 45.711 153.571 45.2792C153.787 44.8295 153.895 44.3258 153.895 43.7681C153.895 43.1924 153.787 42.6887 153.571 42.2569C153.355 41.8072 153.049 41.4564 152.654 41.2045C152.276 40.9527 151.844 40.8268 151.358 40.8268C150.855 40.8268 150.405 40.9527 150.009 41.2045C149.631 41.4564 149.325 41.8072 149.092 42.2569C148.876 42.6887 148.768 43.1924 148.768 43.7681C148.768 44.3258 148.876 44.8295 149.092 45.2792C149.325 45.711 149.631 46.0528 150.009 46.3047C150.405 46.5565 150.855 46.6824 151.358 46.6824ZM162.129 51V36.5632H167.203L167.526 41.3664L166.312 40.6109C166.546 39.7833 166.915 39.0458 167.418 38.3981C167.922 37.7325 168.525 37.2108 169.226 36.833C169.946 36.4552 170.711 36.2663 171.52 36.2663C171.844 36.2663 172.15 36.2933 172.438 36.3473C172.725 36.3833 173.004 36.4372 173.274 36.5092L171.763 42.5808C171.583 42.4548 171.295 42.3379 170.9 42.23C170.522 42.122 170.108 42.0681 169.658 42.0681C169.334 42.0681 169.038 42.122 168.768 42.23C168.516 42.3199 168.3 42.4638 168.12 42.6617C167.958 42.8596 167.832 43.0935 167.742 43.3633C167.652 43.6332 167.607 43.948 167.607 44.3078V51H162.129Z" fill="white"/>
+          </g>
+          <defs>
+          <filter id="filter0_f_1128_2675" x="-8.18167" y="-6.85001" width="95.4304" height="95.4305" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <feGaussianBlur stdDeviation="16.479" result="effect1_foregroundBlur_1128_2675"/>
+          </filter>
+          <filter id="filter1_d_1128_2675" x="51.4562" y="15.6939" width="134.889" height="48.6468" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset/>
+          <feGaussianBlur stdDeviation="6.53537"/>
+          <feComposite in2="hardAlpha" operator="out"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.35 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1128_2675"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1128_2675" result="shape"/>
+          </filter>
+          <linearGradient id="paint0_linear_1128_2675" x1="28.9491" y1="30.486" x2="51.4633" y2="30.486" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#3C78D2"/>
+          <stop offset="0.307292" stop-color="#4690E7"/>
+          <stop offset="0.604167" stop-color="#94B2DF"/>
+          <stop offset="1" stop-color="#6FB3E5"/>
+          </linearGradient>
+          <clipPath id="clip0_1128_2675">
+          <rect width="31.068" height="33.7309" fill="white" transform="translate(24 24)"/>
+          </clipPath>
+          </defs>
+        </svg>
+
+        <hr class="w-full border border-white/[.15]" />
+
+        <a href="#processing" class="special-hover rounded flex text-white gap-2 items-center py-2.5 px-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.18762 2.25V3.375M3.37512 6.1875H2.25012M15.7501 6.1875H14.6251M3.37512 9H2.25012M15.7501 9H14.6251M3.37512 11.8125H2.25012M15.7501 11.8125H14.6251M6.18762 14.625V15.75M9.00012 2.25V3.375M9.00012 14.625V15.75M11.8126 2.25V3.375M11.8126 14.625V15.75M5.06262 14.625H12.9376C13.3852 14.625 13.8144 14.4472 14.1309 14.1307C14.4473 13.8143 14.6251 13.3851 14.6251 12.9375V5.0625C14.6251 4.61495 14.4473 4.18573 14.1309 3.86926C13.8144 3.55279 13.3852 3.375 12.9376 3.375H5.06262C4.61507 3.375 4.18585 3.55279 3.86938 3.86926C3.55291 4.18573 3.37512 4.61495 3.37512 5.0625V12.9375C3.37512 13.3851 3.55291 13.8143 3.86938 14.1307C4.18585 14.4472 4.61507 14.625 5.06262 14.625ZM5.62512 5.625H12.3751V12.375H5.62512V5.625Z" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>            
+
+          Processamento
+        </a>
+
+        <a class="cursor-not-allowed opacity-50 rounded flex text-white gap-2 items-center py-2.5 px-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1128_2638)">
+            <path d="M15.4565 5.18506H2.54348C2.38116 5.18506 2.25 5.31622 2.25 5.47854V10.7611C2.25 10.9235 2.38116 11.0546 2.54348 11.0546H2.83696V12.522C2.83696 12.6843 2.96812 12.8155 3.13043 12.8155H14.8696C15.0319 12.8155 15.163 12.6843 15.163 12.522V11.0546H15.4565C15.6188 11.0546 15.75 10.9235 15.75 10.7611V5.47854C15.75 5.31622 15.6188 5.18506 15.4565 5.18506ZM14.5761 12.2285H13.6957H12.5217H11.3478H10.1739H9H7.82609H6.65217H5.47826H4.30435H3.42391V11.0546H4.30435H5.47826H6.65217H7.82609H9H10.1739H11.3478H12.5217H13.6957H14.5761V12.2285ZM15.163 10.4677H14.8696H3.13043H2.83696V5.77202H15.163V10.4677Z" fill="white"/>
+            <path d="M3.71755 9.88063H5.47842C5.64073 9.88063 5.7719 9.74946 5.7719 9.58715V6.65237C5.7719 6.49005 5.64073 6.35889 5.47842 6.35889H3.71755C3.55524 6.35889 3.42407 6.49005 3.42407 6.65237V9.58715C3.42407 9.74946 3.55524 9.88063 3.71755 9.88063ZM4.01103 6.94584H5.18494V9.29367H4.01103V6.94584Z" fill="white"/>
+            <path d="M6.65237 9.88063H8.41323C8.57555 9.88063 8.70671 9.74946 8.70671 9.58715V6.65237C8.70671 6.49005 8.57555 6.35889 8.41323 6.35889H6.65237C6.49005 6.35889 6.35889 6.49005 6.35889 6.65237V9.58715C6.35889 9.74946 6.49005 9.88063 6.65237 9.88063ZM6.94584 6.94584H8.11976V9.29367H6.94584V6.94584Z" fill="white"/>
+            <path d="M9.58681 9.88063H11.3477C11.51 9.88063 11.6412 9.74946 11.6412 9.58715V6.65237C11.6412 6.49005 11.51 6.35889 11.3477 6.35889H9.58681C9.4245 6.35889 9.29333 6.49005 9.29333 6.65237V9.58715C9.29333 9.74946 9.4245 9.88063 9.58681 9.88063ZM9.88029 6.94584H11.0542V9.29367H9.88029V6.94584Z" fill="white"/>
+            <path d="M12.522 9.88063H14.2829C14.4452 9.88063 14.5763 9.74946 14.5763 9.58715V6.65237C14.5763 6.49005 14.4452 6.35889 14.2829 6.35889H12.522C12.3597 6.35889 12.2285 6.49005 12.2285 6.65237V9.58715C12.2285 9.74946 12.3597 9.88063 12.522 9.88063ZM12.8155 6.94584H13.9894V9.29367H12.8155V6.94584Z" fill="white"/>
+            <path d="M4.59806 11.9351V11.3482C4.59806 11.1859 4.4669 11.0547 4.30459 11.0547C4.14227 11.0547 4.01111 11.1859 4.01111 11.3482V11.9351C4.01111 12.0974 4.14227 12.2286 4.30459 12.2286C4.4669 12.2286 4.59806 12.0974 4.59806 11.9351Z" fill="white"/>
+            <path d="M5.77177 11.9351V11.3482C5.77177 11.1859 5.64061 11.0547 5.47829 11.0547C5.31598 11.0547 5.18481 11.1859 5.18481 11.3482V11.9351C5.18481 12.0974 5.31598 12.2286 5.47829 12.2286C5.64061 12.2286 5.77177 12.0974 5.77177 11.9351Z" fill="white"/>
+            <path d="M6.94584 11.9351V11.3482C6.94584 11.1859 6.81468 11.0547 6.65237 11.0547C6.49005 11.0547 6.35889 11.1859 6.35889 11.3482V11.9351C6.35889 12.0974 6.49005 12.2286 6.65237 12.2286C6.81468 12.2286 6.94584 12.0974 6.94584 11.9351Z" fill="white"/>
+            <path d="M8.11955 11.9351V11.3482C8.11955 11.1859 7.98838 11.0547 7.82607 11.0547C7.66376 11.0547 7.53259 11.1859 7.53259 11.3482V11.9351C7.53259 12.0974 7.66376 12.2286 7.82607 12.2286C7.98838 12.2286 8.11955 12.0974 8.11955 11.9351Z" fill="white"/>
+            <path d="M9.29362 11.9351V11.3482C9.29362 11.1859 9.16246 11.0547 9.00014 11.0547C8.83783 11.0547 8.70667 11.1859 8.70667 11.3482V11.9351C8.70667 12.0974 8.83783 12.2286 9.00014 12.2286C9.16246 12.2286 9.29362 12.0974 9.29362 11.9351Z" fill="white"/>
+            <path d="M10.4673 11.9351V11.3482C10.4673 11.1859 10.3362 11.0547 10.1738 11.0547C10.0115 11.0547 9.88037 11.1859 9.88037 11.3482V11.9351C9.88037 12.0974 10.0115 12.2286 10.1738 12.2286C10.3362 12.2286 10.4673 12.0974 10.4673 11.9351Z" fill="white"/>
+            <path d="M11.6414 11.9351V11.3482C11.6414 11.1859 11.5102 11.0547 11.3479 11.0547C11.1856 11.0547 11.0544 11.1859 11.0544 11.3482V11.9351C11.0544 12.0974 11.1856 12.2286 11.3479 12.2286C11.5102 12.2286 11.6414 12.0974 11.6414 11.9351Z" fill="white"/>
+            <path d="M12.8155 11.9351V11.3482C12.8155 11.1859 12.6843 11.0547 12.522 11.0547C12.3597 11.0547 12.2285 11.1859 12.2285 11.3482V11.9351C12.2285 12.0974 12.3597 12.2286 12.522 12.2286C12.6843 12.2286 12.8155 12.0974 12.8155 11.9351Z" fill="white"/>
+            <path d="M13.9893 11.9351V11.3482C13.9893 11.1859 13.8581 11.0547 13.6958 11.0547C13.5335 11.0547 13.4023 11.1859 13.4023 11.3482V11.9351C13.4023 12.0974 13.5335 12.2286 13.6958 12.2286C13.8581 12.2286 13.9893 12.0974 13.9893 11.9351Z" fill="white"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_1128_2638">
+            <rect width="13.5" height="13.5" fill="white" transform="translate(2.25 2.25)"/>
+            </clipPath>
+            </defs>
+            </svg>
+                       
+
+          Memória
+        </a>
+
+        <a class="cursor-not-allowed opacity-50 rounded flex text-white gap-2 items-center py-2.5 px-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1128_2613)">
+            <path d="M14.7595 3.40188C14.7595 2.76572 14.2438 2.25 13.6076 2.25H4.3926C3.75644 2.25 3.24072 2.76572 3.24072 3.40188V14.5981C3.24072 15.2343 3.75644 15.75 4.3926 15.75H13.6076C14.2438 15.75 14.7595 15.2343 14.7595 14.5981V3.40188ZM4.69259 3.2091C5.10501 3.2091 5.43938 3.54347 5.43938 3.95588C5.43938 4.3683 5.10501 4.70267 4.69259 4.70267C4.28013 4.70267 3.94581 4.3683 3.94581 3.95588C3.94581 3.54347 4.28013 3.2091 4.69259 3.2091ZM4.69259 15.0817C4.28013 15.0817 3.94581 14.7474 3.94581 14.3349C3.94581 13.9225 4.28018 13.5882 4.69259 13.5882C5.10501 13.5882 5.43938 13.9225 5.43938 14.3349C5.43938 14.7474 5.10506 15.0817 4.69259 15.0817ZM9.7891 11.1797L9.95377 9.75181C9.96603 9.64593 9.93866 9.5494 9.87673 9.48001C9.78053 9.37201 9.61751 9.3504 9.47233 9.43232L7.21442 10.7064C6.17368 10.0666 5.47942 8.91785 5.47942 7.60664C5.47942 5.59837 7.10744 3.97031 9.11576 3.97031C11.1241 3.97031 12.7521 5.59837 12.7521 7.60664C12.752 9.38473 11.4755 10.8638 9.7891 11.1797ZM13.3383 15.0817C12.9258 15.0817 12.5915 14.7474 12.5915 14.3349C12.5915 13.9225 12.9259 13.5882 13.3383 13.5882C13.7507 13.5882 14.0851 13.9225 14.0851 14.3349C14.0851 14.7474 13.7508 15.0817 13.3383 15.0817ZM13.3383 4.70267C12.9258 4.70267 12.5915 4.3683 12.5915 3.95588C12.5915 3.54347 12.9259 3.2091 13.3383 3.2091C13.7507 3.2091 14.0851 3.54347 14.0851 3.95588C14.0851 4.3683 13.7508 4.70267 13.3383 4.70267Z" fill="white"/>
+            <path d="M9.11574 8.91776C9.83974 8.91776 10.4267 8.33083 10.4267 7.60683C10.4267 6.88282 9.83974 6.2959 9.11574 6.2959C8.39173 6.2959 7.80481 6.88282 7.80481 7.60683C7.80481 8.33083 8.39173 8.91776 9.11574 8.91776Z" fill="white"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_1128_2613">
+            <rect width="13.5" height="13.5" fill="white" transform="translate(2.25 2.25)"/>
+            </clipPath>
+            </defs>
+            </svg>     
+
+          Armazenamento
+        </a>
+
+        <a href="#system" class="special-hover rounded flex text-white gap-2 items-center py-2.5 px-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1128_2617)">
+            <path d="M13.0264 3.19737C13.0264 2.67414 12.6022 2.25 12.079 2.25H5.92112C5.39789 2.25 4.97375 2.67414 4.97375 3.19737V14.8026C4.97375 15.3259 5.39789 15.75 5.92112 15.75H12.079C12.6022 15.75 13.0264 15.3259 13.0264 14.8026V3.19737ZM11.7948 14.0447H6.20533V12.8605H11.7948V14.0447ZM8.61392 8.38516C8.61392 8.05131 8.88459 7.78064 9.21844 7.78064C9.55229 7.78064 9.82295 8.05131 9.82295 8.38516C9.82295 8.71901 9.55229 8.98967 9.21844 8.98967C8.88459 8.98967 8.61392 8.71901 8.61392 8.38516ZM10.4607 8.38516C10.4607 8.05131 10.7314 7.78064 11.0652 7.78064C11.3991 7.78064 11.6698 8.05131 11.6698 8.38516C11.6698 8.71901 11.3991 8.98967 11.0652 8.98967C10.7313 8.98967 10.4607 8.71901 10.4607 8.38516ZM11.7948 6.70263H6.20533V5.47105H11.7948V6.70263ZM11.7948 4.52368H6.20533V3.29211H11.7948V4.52368Z" fill="white"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_1128_2617">
+            <rect width="13.5" height="13.5" fill="white" transform="translate(2.25 2.25)"/>
+            </clipPath>
+            </defs>
+            </svg>
+              
+
+          Sistema
+        </a>
+      </nav>
+
+      <footer class="flex flex-col w-full gap-4">
+        <a href="https://github.com/vitorgouveia/monitor" target="_blank" class="hover:bg-white/10 rounded flex text-white gap-2 items-center py-2.5 px-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.125 4.5H3.9375C3.48995 4.5 3.06072 4.67779 2.74426 4.99426C2.42779 5.31073 2.25 5.73995 2.25 6.1875V14.0625C2.25 14.5101 2.42779 14.9393 2.74426 15.2557C3.06072 15.5722 3.48995 15.75 3.9375 15.75H11.8125C12.2601 15.75 12.6893 15.5722 13.0057 15.2557C13.3222 14.9393 13.5 14.5101 13.5 14.0625V7.875M5.625 12.375L15.75 2.25M15.75 2.25H11.8125M15.75 2.25V6.1875" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          About
+        </a>
+
+        <button onclick="exit()" class="flex text-white gap-2 items-center py-2.5 px-2 hover:bg-white/10 rounded">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.8125 6.75V3.9375C11.8125 3.48995 11.6347 3.06072 11.3182 2.74426C11.0018 2.42779 10.5726 2.25 10.125 2.25H5.625C5.17745 2.25 4.74823 2.42779 4.43176 2.74426C4.11529 3.06072 3.9375 3.48995 3.9375 3.9375V14.0625C3.9375 14.5101 4.11529 14.9393 4.43176 15.2557C4.74823 15.5722 5.17745 15.75 5.625 15.75H10.125C10.5726 15.75 11.0018 15.5722 11.3182 15.2557C11.6347 14.9393 11.8125 14.5101 11.8125 14.0625V11.25M14.0625 11.25L16.3125 9M16.3125 9L14.0625 6.75M16.3125 9H6.75" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>            
+
+          Exit
+        </button>
+      </footer>
+    </aside>
+
+    <main class="relative overflow-x-hidden flex w-full flex-col gap-5 p-6">
+      <h1 class="text-4xl text-white font-bold">CPU - Processador</h1>
+
+      <section class="flex flex-col w-full gap-1">
+        <h2 class="text-3xl font-semibold text-white" id="cpu-name"></h2>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Clock Base:</p>
+          <p class="text-white text-xl font-light" id="base-clock"></p>
+        </div>
+
+        <!-- <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Socket:</p>
+          <p class="text-white text-xl font-light" id="socket"></p>
+        </div> -->
+        
+        <!-- <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Instruções:</p>
+          <p class="text-white text-xl font-light" id="instructions"></p>
+        </div> -->
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Virtualização:</p>
+          <p class="text-white text-xl font-light" id="virtualization"></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Núcleos:</p>
+          <p class="text-white text-xl font-light" id="cores"></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">Threads:</p>
+          <p class="text-white text-xl font-light" id="threads"></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">L1 Cache:</p>
+          <p class="text-white text-xl font-light" id="l1"></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">L2 Cache:</p>
+          <p class="text-white text-xl font-light" id="l2"></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <p class="text-white/70 text-xl font-light">L3 Cache:</p>
+          <p class="text-white text-xl font-light" id="l3"></p>
+        </div>
+      </section>
+
+      <div class="w-[100%] h-[50%] flex gap-8">
+        <div class="w-[80%]">
+          <canvas id="line-chart"></canvas>
+        </div>
+        <div class="w-[30%]">
+          <canvas id="gauge-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="w-[66rem] h-[16rem] rounded-[66rem] absolute" style="filter: blur(500px); background: #90B2DF; transform: rotate(30.325deg); right: -23.91075rem; top: -20.01444rem;"></div>
+      <div class="w-[66rem] h-[16rem] rounded-[66rem] absolute" style="filter: blur(500px); background: #2B5095; transform: rotate(5.325deg); left: -15.91075rem; bottom: 7rem;"></div>
+    </main>
+
+    <script>
+      const ctx = document.getElementById('line-chart');
+
+      const ctx2d = ctx.getContext("2d")
+      var gradient = ctx2d.createLinearGradient(0, 0, 0, 400); // (x0, y0, x1, y1)
+      gradient.addColorStop(0, 'rgba(19, 43, 50, 1)'); // start color with opacity
+      gradient.addColorStop(1, 'rgba(19, 43, 50, 0.4)'); // end color with opacity
+
+
+      var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: '% Uso',
+            data: [],
+            borderColor: 'rgba(64, 170, 145, 1)', // Line color
+            backgroundColor: gradient,
+            borderWidth: 2,
+            fill: true,
+            lineTension: 0.3,
+            pointRadius: 0
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 10,
+                callback: function (value) {
+                  return value + '%'; // Adicionar o símbolo de percentagem
+                },
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "white"
+              }
+            },
+            tooltip: {
+              mode: 'nearest',
+              intersect: false,
+              callbacks: {
+                label: function (context) {
+                  return 'CPU: ' + context.raw + '%';
+                },
+              },
+            },
+            title: {
+              display: true,
+              text: 'Uso da CPU',
+              align: "start",
+              font: {
+                size: 30
+              },
+              color: "white"
+            }
+          },
+          responsive: true, // Make the chart responsive
+          maintainAspectRatio: false, // Allow the chart to change its aspect ratio
+        }
+      });
+    </script>
+
+    <script>
+      const gauge = document.getElementById('gauge-chart');
+
+      var gaugeChart = new Chart(gauge, {
+        type: 'doughnut',
+        data: {
+          labels: ['Temperatura'],
+          datasets: [
+            {
+              label: 'Temp. °C',
+              data: [5, 95],
+              backgroundColor: ["Red", "rgba(255, 255, 255, 0.1)"],
+              borderWidth: 0,
+            },
+          ]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 100,
+              display: false,
+            },
+            y: {
+              beginAtZero: true,
+              max: 80,
+              display: false,
+              ticks: {
+                stepSize: 10,
+                callback: function (value) {
+                  return value + '°C'; // Adicionar o símbolo de percentagem
+                },
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "white"
+              }
+            },
+            title: {
+              display: true,
+              text: 'Temp. da CPU',
+              align: "start",
+              font: {
+                size: 30
+              },
+              color: "white"
+            },
+          },
+          circumference: 180, // sweep angle in degrees
+          rotation: 270, // start angle in degrees
+          responsive: true, // Make the chart responsive
+          maintainAspectRatio: false, // Allow the chart to change its aspect ratio
+        }
+      });
+    </script>
+
+    <script>
+      function exit() {
+        console.log("exit the app")
+        window.close()
+      }
+    </script>
+    
+    <script type="module">
+
+      const cpuName = document.querySelector("#cpu-name")
+
+      // tags
+      const baseClock = document.querySelector("#base-clock")
+      // const socket = document.querySelector("#socket")
+      // const instructions = document.querySelector("#instructions")
+      const virtualization = document.querySelector("#virtualization")
+      const cores = document.querySelector("#cores")
+      const threads = document.querySelector("#threads")
+      const l1 = document.querySelector("#l1")
+      const l2 = document.querySelector("#l2")
+      const l3 = document.querySelector("#l3")
+
+      const response = await fetch("/cpu", {
+        method: "GET"
+      })
+
+      const data = await response.json()
+
+      const cpu = data
+
+      cpuName.textContent = `${cpu.brand}`
+      baseClock.textContent = `${cpu.baseClock}GHz`
+      // if(cpu.socket) {
+      //   socket.textContent = cpu.socket
+      //   socket.style.display = "block"
+      // } else {
+      // }
+      // instructions.textContent = cpu.instructions
+      virtualization.textContent = cpu.virtualization ? "Habilitada" : "Desabilitada"
+      cores.textContent = cpu.cores
+      threads.textContent = cpu.threads
+      l1.textContent = cpu.cache.l1
+      l2.textContent = cpu.cache.l2
+      l3.textContent = cpu.cache.l3
+
+
+
+
+
+
+
+
+
+      const websocket = new WebSocket('ws://localhost:3000/websocket');
+  
+      websocket.addEventListener('open', (event) => {
+        console.log('Connected to the WebSocket server');
+      });
+  
+      let cpuLoad = []
+
+      // var animationFrameId = null;
+
+      websocket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data)
+        
+        console.log(`Pushing ${data.cpuLoad}`)
+
+        gaugeChart.data.datasets[0].data = [data.cpuTemp, 100 - data.cpuTemp]
+
+        console.log(lineChart.data.datasets[0].data.length)
+        if (lineChart.data.datasets[0].data.length >= 500) {
+          lineChart.data.datasets[0].data.shift();
+          lineChart.data.labels.shift();
+        }
+
+        lineChart.data.datasets[0].data.push(Number(data.cpuLoad))
+
+        lineChart.data.labels.push("")
+        
+        lineChart.update()
+        gaugeChart.update()
+
+        // animationFrameId = requestAnimationFrame(updateChart);
+        // cpuLoad.push(data.cpuLoad)
+      });
+
+      // updateChart();
+  
+      websocket.addEventListener('close', (event) => {
+        console.log('Connection closed');
+      });
+
+
+
+
+
+    </script>
+  </body>
+</html>

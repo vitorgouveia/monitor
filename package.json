@@ -1,0 +1,34 @@
+{
+  "name": "@monitor/app",
+  "version": "1.0.0",
+  "description": "Cross-platform system monitor websocket and pooling server.",
+  "main": "src/index.js",
+  "type": "module",
+  "engines": {
+    "node": "18.18.1"
+  },
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "test": "node --test",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitorgouveia/monitor.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Vitor Gouveia <vitorneves.gouveia10@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vitorgouveia/monitor/issues"
+  },
+  "homepage": "https://github.com/vitorgouveia/monitor#readme",
+  "dependencies": {
+    "@fastify/static": "^6.11.2",
+    "@fastify/websocket": "^8.2.0",
+    "fastify": "^4.24.0",
+    "systeminformation": "^5.21.12"
+  }
+}
